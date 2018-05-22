@@ -1,2 +1,2 @@
 # PaymentAPI
-Payment API for XCash. Multiple programming languages.
+Payment API for XCash, is comming soon. Multiple programming languages support.
