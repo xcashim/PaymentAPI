@@ -158,7 +158,7 @@ logic_session* logic_interface::get_pre_session(session_oid_t id)
 
 int logic_interface::add_session( logic_session* pSession, const host_msg_hd& hd, uint32 maxBuffer)
 {
-	if (has_session(hd)) //修改前：会话已经存在则放弃      修改后：会话已经存在则清除原会话重新赋值
+	if (has_session(hd)) 
 	{
 		//m_sessionVecs[hd.m_threadOid][hd.m_connOid] = NULL;
     }

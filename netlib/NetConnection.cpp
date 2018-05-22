@@ -270,11 +270,11 @@ void net_conn_detect(evutil_socket_t fd, short event, void *arg)
 		net_conn* pConn;
 		timeval tmVal;
 		evutil_gettimeofday(&tmVal, NULL);
-		/*for (conn_oid_t id = 8; id < pConnPool->m_nMaxConns; id++)*/ //cooker 2017-3-29 08:23:12
-		for (conn_oid_t id = 8; id < pConnPool->m_nMaxConns; id++)//针对每个IO线程
+		/*for (conn_oid_t id = 8; id < pConnPool->m_nMaxConns; id++)*/ 
+		for (conn_oid_t id = 8; id < pConnPool->m_nMaxConns; id++)//
 		{
 			pConn = pConnPool->m_pConns[id];
-			if (pConn&&( tmVal.tv_sec - pConn->m_revSec > CHECK_NET_INTERVAL ))//CHECK_NET_INTERVAL秒无网络消息 则断开连接
+			if (pConn&&( tmVal.tv_sec - pConn->m_revSec > CHECK_NET_INTERVAL ))//
 			{
 				printf("detect---kill net ConnId:%d .\n", pConn->m_iConnId);
 				io_notify_logic_conn_msg(pConn, cs_net_norecv, invalid_session_oid);

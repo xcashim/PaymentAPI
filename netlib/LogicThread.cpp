@@ -26,7 +26,7 @@ static bool has_listen(const net_setting& setting)
 
 logic_thread* logic_thread_new( const net_setting& setting )
 {
-    ELOG_INIT("");//上层调用程序会用到
+    ELOG_INIT("");
 
     logic_thread* pLogicThread = new logic_thread;
     if (pLogicThread == NULL) {
@@ -96,7 +96,6 @@ void logic_thread_del( logic_thread* pThread )
         thread_dispatcher_del(pThread->m_pDispatcher);
         pThread->m_pDispatcher = NULL;
     }
-	//此处丢失释放 pThread->m_pReConnDispatcher 的逻辑? 2016-7-20
 	if (pThread->m_pReConnDispatcher) {
 		thread_dispatcher_fini(pThread->m_pReConnDispatcher);
 		thread_dispatcher_del(pThread->m_pReConnDispatcher);
@@ -114,7 +113,7 @@ void logic_thread_del( logic_thread* pThread )
     WSACleanup();
 #endif
 
-    ELOG_FINI();//上层调用程序会用到
+    ELOG_FINI();
 }
 
 int logic_thread_run( logic_thread* pThread )

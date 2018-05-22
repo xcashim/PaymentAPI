@@ -73,7 +73,7 @@ int my_send_reconn_conn_msg_json( logic_thread* pLogic, thread_oid_t toid, conn_
 	if (toid == invalid_thread_oid || coid == invalid_conn_oid) {
 		return -1;
 	}
-	net_msg* pNetMsg = (net_msg*)msg_alloc(sizeof(host_msg_hd) + 1024);//json数据包定长1024
+	net_msg* pNetMsg = (net_msg*)msg_alloc(sizeof(host_msg_hd) + 1024);
 	if (pNetMsg == NULL) 
 	{
 		return -1;
@@ -138,7 +138,6 @@ parse_msg_relt my_io_recv_msg(bufferevent* pBuffer, net_conn* pConn, event_msgqu
             return pmr_buffer_error;                
         }
 
-        //添加版本号检测:GAME_PROTOCOL_VER
         if (msgHd.m_nLenChk != msgHd.m_head.wLen || msgHd.m_head.byVar != GAME_PROTOCOL_VER) {
             return pmr_verify_failed;
         }
@@ -227,12 +226,11 @@ void my_io_send_msg(const net_msg* pMsg, void* args)
 }
 
 
-//for json 2016-10-11 json数据包定长1024
 parse_msg_relt my_io_recv_msg_json(bufferevent* pBuffer, net_conn* pConn, event_msgqueue* pInputQueue)
 {
 	for (;;) 
 	{
-		net_conn_recv_sec(pConn);//更新连接的数据接收状态 防止超时被踢掉
+		net_conn_recv_sec(pConn);
 
 		evbuffer* pInputBuf = bufferevent_get_input(pBuffer);
 		size_t L = evbuffer_get_length(pInputBuf);
@@ -247,14 +245,14 @@ parse_msg_relt my_io_recv_msg_json(bufferevent* pBuffer, net_conn* pConn, event_
 			return pmr_buffer_error;                
 		}
 
-		//检测是否为非json消息
+
 		if (msgHd.m_nLenChk == msgHd.m_head.wLen && msgHd.m_head.byVar == GAME_PROTOCOL_VER) 
 		{
 			return my_io_recv_msg(pBuffer, pConn, pInputQueue);
 		}
 		
-		//进入这一步的都识别为json消息
-		size_t msgSize = 1024;//json数据包定长1024
+
+		size_t msgSize = 1024;
 		if (L != msgSize) 
 		{
 			return pmr_ok;			
@@ -288,7 +286,6 @@ parse_msg_relt my_io_recv_msg_json(bufferevent* pBuffer, net_conn* pConn, event_
 	return pmr_ok;
 }
 
-//for json 2016-10-11 json数据包定长1024
 void my_io_send_msg_json(const net_msg* pMsg, void* args)
 {
 	const host_msg_hd& hd = pMsg->m_hd;

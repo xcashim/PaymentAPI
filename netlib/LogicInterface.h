@@ -23,9 +23,6 @@ enum session_state
 };
 
 //////////////////////////////////////////////////////////////////////////
-/// <summary>
-/// 业务逻辑消息及处理结构基类
-/// </summary>
 class logic_session
 {
 public:
@@ -78,19 +75,13 @@ public:
     
     virtual void disconnected();
 
-//private:
-//    reconn_event* m_pReconn;//2015-06-25 临时调试使用
 protected:
-	reconn_event* m_pReconn;//2015-06-25 临时调试使用
+	reconn_event* m_pReconn;//
 };
 
 struct thread_dispatcher;
 
 //////////////////////////////////////////////////////////////////////////
-///	业务逻辑处理基类
-/// <summary>
-/// 业务逻辑处理基类
-/// </summary>
 class logic_interface
 {
 public:    

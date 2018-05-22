@@ -162,7 +162,6 @@ static inline bool circle_queue_is_full( circle_queue* cq )
     return circle_queue_size(cq) == cq->m_max_count;
 }
 
-//如果满了，将cq清空
 static inline int circle_queue_clear(circle_queue* cq)
 {
     cq->m_head = 0;

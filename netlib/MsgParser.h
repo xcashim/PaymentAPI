@@ -38,30 +38,30 @@ public:
 
 //struct for blockchain
 
-//网络内核
+//
 struct TCP_Info
 {
-	BYTE							cbDataKind;							//数据类型
-	BYTE							cbCheckCode;						//效验字段
-	WORD							wPacketSize;						//数据大小
+	BYTE							cbDataKind;							//
+	BYTE							cbCheckCode;						//
+	WORD							wPacketSize;						//
 };
 
-//网络命令
+//
 struct TCP_Command
 {
-	WORD							wMainCmdID;							//主命令码
-	WORD							wSubCmdID;							//子命令码
+	WORD							wMainCmdID;							//
+	WORD							wSubCmdID;							//
 };
 
-//网络包头
+//
 struct TCP_Head
 {
-	TCP_Info						TCPInfo;							//基础结构
-	TCP_Command						CommandInfo;						//命令信息
+	TCP_Info						TCPInfo;							//
+	TCP_Command						CommandInfo;						//
 };
 
 
-//2016-10-11
+//
 class CJsonMsg
 {
 public:

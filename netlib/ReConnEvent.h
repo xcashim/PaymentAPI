@@ -41,7 +41,7 @@ private:
     uint32 m_maxBuffer;
 
 public:
-	std::string m_strIp;//2015-06-25  临时调试使用
+	std::string m_strIp;
 };
 
 #endif // RE_CONN_EVENT_H
