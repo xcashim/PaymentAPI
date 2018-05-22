@@ -342,14 +342,14 @@ void my_io_send_msg_json(const net_msg* pMsg, void* args)
 
 
 
-//for block chain 数据包头 同 loginsvr  cooker 2018-01-15 17:52:20
+
 parse_msg_relt my_io_recv_msg_block_chain(bufferevent* pBuffer, net_conn* pConn, event_msgqueue* pInputQueue)
 {
 	for (;;) 
 	{
-		net_conn_recv_sec(pConn);//更新连接的数据接收状态 防止超时被踢掉
+		net_conn_recv_sec(pConn);
 
-		//长度验证
+	
 		evbuffer* pInputBuf = bufferevent_get_input(pBuffer);
 		size_t L = evbuffer_get_length(pInputBuf);
 		if (L < sizeof(TCP_Head)) 
@@ -357,14 +357,14 @@ parse_msg_relt my_io_recv_msg_block_chain(bufferevent* pBuffer, net_conn* pConn,
 			return pmr_ok;
 		}
 
-		//头部拷贝
+
 		TCP_Head msgHd;
 		if (evbuffer_copyout(pInputBuf, &msgHd, sizeof(TCP_Head)) != sizeof(TCP_Head)) 
 		{
 			return pmr_buffer_error;                
 		}
 
-		//分配内存
+	
 		uint8* pMsg = msg_alloc(sizeof(TCP_Head) + msgHd.TCPInfo.wPacketSize);
 		if (!pMsg)
 		{
@@ -394,7 +394,7 @@ parse_msg_relt my_io_recv_msg_block_chain(bufferevent* pBuffer, net_conn* pConn,
 	return pmr_ok;
 }
 
-//for block chain 数据包头 同 loginsvr  cooker 2018-01-15 17:52:20
+
 void my_io_send_msg_block_chain(const net_msg* pMsg, void* args)
 {
 	const host_msg_hd& hd = pMsg->m_hd;
